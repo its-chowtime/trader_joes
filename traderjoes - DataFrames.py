@@ -4,6 +4,12 @@ import numpy as np
 import yfinance as yf
 import re
 import sys
+import csv
+
+df = pd.read_csv("PPD_Data.csv")
+print(df.tail())
+
+print(df['Last Action'].head())
 
 
 # listTickers = "SPY"
@@ -20,12 +26,13 @@ def create_stock_list():
 
 
 
-def pull_stock_data(listTickers,startDate,endDate,groupby):
-    data = yf.download (tickers="SPY", start=startDate, end=endDate, group_by=groupby)
+def pull_stock_data():
+    data = yf.download (tickers="SPY", start="2021-01-01", end="2021-06-24", group_by="tickers")
     df = pd.DataFrame(data)
-    # print(df.head(5))
+    print(df.head(5))
     return df
 
+#pull_stock_data()
 
 
 def enter_dates(): # 
