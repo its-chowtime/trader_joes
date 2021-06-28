@@ -6,10 +6,6 @@ import re
 import sys
 import csv
 
-df = pd.read_csv("PPD_Data.csv")
-print(df.tail())
-
-print(df['Last Action'].head())
 
 
 # listTickers = "SPY"
@@ -20,14 +16,14 @@ print(df['Last Action'].head())
 
 
 def create_stock_list():
-    print("Enter the stocks you want to track; separate by ' ': (ex. 'SPY QQQ TSLA' ")
-    listTickers = input()
-    return listTickers
+    print("Enter the stocks you want to track; separate by ' ': (ex. 'SPY QQQ TSLA') ")
+    stocklist = input()
+    return stocklist
 
 
 
-def pull_stock_data():
-    data = yf.download (tickers="SPY", start="2021-01-01", end="2021-06-24", group_by="tickers")
+def pull_stock_data(listTickers, start, end, interval):
+    data = yf.download (tickers=listTickers, start=start, end=end, interval=interval, group_by="tickers")
     df = pd.DataFrame(data)
     print(df.head(5))
     return df
@@ -36,24 +32,16 @@ def pull_stock_data():
 
 
 def enter_dates(): # 
-    startDate = input()
-    endDate = input()
+    startDate = input("Enter start date: ")
+    endDate = input("Enter end date: ")
     return startDate,endDate
 
 
 
-def run_function(listTickers,startDate,endDate,groupby):
-    list1 = []
-    listTickers()
-    enter_dates()
-    pull_stock_data(listTickers,startDate,endDate,groupby)
+def run_function():
+    listTickers = create_stock_list()
+    start,end = enter_dates()
+    interval = input("Interval: ")
+    pull_stock_data(listTickers, start, end, interval)
 
-def main():
-    try:
-        print('yes')
-        end = sys.argv[0]
-        print(end)
-    except:
-        print('nope')
-
-main()
+run_function()
