@@ -7,7 +7,6 @@ import sys
 import csv
 
 
-
 # listTickers = "SPY"
 # startDate = "2021-01-01"
 # endDate = "2021-06-24"
