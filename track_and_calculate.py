@@ -19,4 +19,13 @@
 from clean_trade_activity import find_line_number
 
 df = find_line_number()
-print(df)
+
+def run_function():
+
+    # store [SIDE] orders to variable + include [Qty]
+    buy_df = df[df['Side']=='BUY']
+
+    return buy_df
+
+
+print(run_function())
